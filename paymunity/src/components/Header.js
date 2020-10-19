@@ -9,7 +9,7 @@ class Header extends React.Component {
   }
 
   render() {
-    return (
+   return (
       <div class="header">
       <center>
           <img src={logo} alt="logo" />

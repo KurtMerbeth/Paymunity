@@ -96,6 +96,28 @@ class App extends Component {
      console.log("sendButton();"); 
      console.log("recipient: "+sendData.recipient);
      console.log("amount"+sendData.amount);
+
+  this.state.web3.eth.sendTransaction({
+      from: this.state.account,
+      to: sendData.recipient,
+      value: Web3.utils.toWei(sendData.amount)
+  })
+  .on('transactionHash', function(hash){
+      console.log(("transactionHash: "));
+      console.log(hash);
+  })
+  .on('receipt', function(receipt){
+    console.log(("receipt: "));
+    console.log(receipt);
+  })
+  .on('confirmation', function(confirmationNumber, receipt){ 
+    console.log("confirmation");
+    console.log("confirmationNumber: "+confirmationNumber);
+    console.log("receipt: "+receipt)
+  })
+  .on('error', console.error); // If a out of gas error, the second parameter is the receipt.
+
+
   }
 
   /*

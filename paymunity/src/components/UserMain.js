@@ -6,8 +6,10 @@ class UserMain extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        recipient: 'recipient address 0x12345...',
-        amount: 0.00
+        recipient: '',
+        amount: 0.00,
+        addressInfo: '',
+        amountInfo: ''
       }
   }
   
@@ -20,7 +22,16 @@ class UserMain extends React.Component {
 
   onClickHandlerSend = async (event) => {
     event.preventDefault();
-    this.props.sendButton(this.state);
+    if(Web3.utils.isAddress(this.state.recipient) && (this.state.amount > 0 && this.state.amount < this.props.balance)) {
+      this.setState({addressInfo: '', amountInfo: ''})
+      this.props.sendButton(this.state);
+    } else {
+      if(!Web3.utils.isAddress(this.state.recipient)) this.setState({addressInfo: 'address invalid'});
+      if(this.state.amount <= 0) this.setState({amountInfo: 'amount too low'});
+      if(this.state.amount > this.props.balance) this.setState({amountInfo: 'unsifficient funds'});
+    }
+    
+    
   }
 
 
@@ -31,8 +42,13 @@ class UserMain extends React.Component {
             <button onClick={this.props.showUserMenu}>User menu</button>
             <br />
             <br />
-            recipient: <p> <input type="text" name="recipient" value={this.state.recipient} onChange={this.recipientHandler} /> </p>
-            amount: <p> <input type="text" name="amount" value={this.state.amount} onChange={this.amountHandler} /> </p>
+            recipient: <input type="text" name="recipient" value={this.state.recipient} onChange={this.recipientHandler} /> 
+            <br />
+            {this.state.addressInfo}
+            <br />
+            amount: <input type="text" name="amount" value={this.state.amount} onChange={this.amountHandler} /> 
+            <br />
+            {this.state.amountInfo}
             <br />
             <button onClick={this.onClickHandlerSend}>send</button>
             <p>
