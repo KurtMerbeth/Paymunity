@@ -12,8 +12,6 @@ class Test extends React.Component {
           <br /> <br /> <br /> <br />
           <hr></hr>
           <h5> for testing only</h5>
-            <button onClick={this.props.test} >TEST</button>
-            <p></p>
             <button onClick={this.props.metamaskButton}>Metamask</button>
         </center>
       </div>

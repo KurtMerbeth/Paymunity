@@ -30,8 +30,6 @@ class UserMain extends React.Component {
       if(this.state.amount <= 0) this.setState({amountInfo: 'amount too low'});
       if(this.state.amount > this.props.balance) this.setState({amountInfo: 'unsifficient funds'});
     }
-    
-    
   }
 
 
