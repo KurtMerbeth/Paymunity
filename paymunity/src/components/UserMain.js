@@ -39,7 +39,6 @@ class UserMain extends React.Component {
     return (
       <div>
         <center>
-            <button onClick={this.props.showUserMenu}>User menu</button>
             <br />
             <br />
             recipient: <input type="text" name="recipient" value={this.state.recipient} onChange={this.recipientHandler} /> 

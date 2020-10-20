@@ -1,6 +1,5 @@
 import React from 'react';
 import logo from '../media/paymunity.png';
-import '../App.css';
 
 class Header extends React.Component {
 

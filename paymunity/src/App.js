@@ -1,13 +1,18 @@
 import React, {Component} from 'react';
-import './App.css';
 
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 
-import Header from './components/Header'
-import Login from './components/Login'
-import UserMain from './components/UserMain'
-import Test from './components/Test'
+import Header from '../components/Header'
+import Login from '../components/Login'
+import UserMain from '../components/UserMain'
+import UserMenu from '../components/UserMenu'
+import Test from '../components/Test'
+import Navbar from '../components/Navbar'
+
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+
+import 'bootstrap/dist/css/bootstrap.min.css' 
 
 
 class App extends Component {
@@ -166,6 +171,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Router>
+          <Navbar />
+          <Switch>
+            <Route path="/usermenu" exact component={UserMenu} />
+          </Switch>
+        </Router>
         <div class="header">
           <br />
           {this.state.showHeader && <Header />}
