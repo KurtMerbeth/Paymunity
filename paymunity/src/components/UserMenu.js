@@ -6,7 +6,8 @@ class UserMenu extends React.Component {
   constructor(props) {
       super(props);
       this.state = {
-        account: 'undefined'
+        accountAddress: 'undefined', 
+        accountBalance: 'undefined'
       }
   }
   
@@ -22,18 +23,38 @@ class UserMenu extends React.Component {
     this.props.sendButton(this.state);
   }
 
+  handleChangeAccount = async event => {
+    const account = event.target.value
+    this.setState({account})
+  }
+
+  componentDidMount = async () => {
+
+    const accountAddress = this.props.account
+    const accountBalance = this.props.accountBalance
+
+    this.setState({
+      accountAddress: accountAddress, 
+      accountBalance: accountBalance
+    })
+  }
+
 
   render() {
+
+    const {accountAddress, accountBalance} = this.state
+
     return (
       <div>
         <center>
-            <button onClick={this.props.showUserMain}>User main</button>
+            {/*<button onClick={this.props.showUserMain}>User main</button>
             <br />
             <p>
-                account: {this.props.account}
+                Address: {accountAddress}
                 <br />
-                balance: {this.props.balance}
-            </p>
+                Balance: {accountBalance}
+            </p>*/}
+            Hallo hier ist das User Menu. 
         </center>
       </div>
     );

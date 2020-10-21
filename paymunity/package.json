@@ -10,13 +10,16 @@
     "ethers": "^5.0.17",
     "react": "^16.14.0",
     "react-bootstrap": "^1.3.0",
+    "bootstrap": "^4.4.1",
     "react-camera-qr": "^1.0.1",
     "react-dom": "^16.14.0",
     "react-native-camera": "^3.40.0",
     "react-qr-reader": "^2.2.1",
     "react-scripts": "3.4.3",
     "reactive-qr": "^0.1.8",
-    "web3": "^1.2.11"
+    "react-router-dom": "^5.1.2",
+    "web3": "^1.2.11",
+    "styled-components": "^5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",

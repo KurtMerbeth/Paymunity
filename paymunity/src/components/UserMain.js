@@ -30,8 +30,6 @@ class UserMain extends React.Component {
       if(this.state.amount <= 0) this.setState({amountInfo: 'amount too low'});
       if(this.state.amount > this.props.balance) this.setState({amountInfo: 'unsifficient funds'});
     }
-    
-    
   }
 
 
@@ -39,7 +37,6 @@ class UserMain extends React.Component {
     return (
       <div>
         <center>
-            <button onClick={this.props.showUserMenu}>User menu</button>
             <br />
             <br />
             recipient: <input type="text" name="recipient" value={this.state.recipient} onChange={this.recipientHandler} /> 
