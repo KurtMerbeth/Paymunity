@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { NavBar } from '../components'
 import { User, Main, Friends, Settings } from '../pages'
 
-import 'bootstrap/dist/css/bootstrap.min.css'
+//import 'bootstrap/dist/css/bootstrap.min.css'
 
 class App extends Component {
 

@@ -51,7 +51,7 @@ class UserMain extends React.Component {
             <p>
                 account: {this.props.account}
                 <br />
-                balance: {this.props.balance} ETH
+                balance: {this.props.balance} PMT
             </p>
         </center>
       </div>
