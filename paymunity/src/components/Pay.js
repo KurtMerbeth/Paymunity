@@ -38,8 +38,10 @@ class Pay extends React.Component {
       super(props);
 
       this.state = {
-        recipient: '', 
-        amount: ''
+        recipient: '',
+        amount: 0.00,
+        addressInfo: '',
+        amountInfo: ''
       }
   }
 
@@ -78,13 +80,15 @@ class Pay extends React.Component {
         <center>
           <Title>Send Moneyz</Title>
 
-          <Label>Address: </Label>
+          <Label>Recipient: </Label>
           <InputText
             name='recipient'
             type="text"
             value={recipient}
             onChange={this.handleChangeRecipientAddress}
           />
+
+          {this.state.addressInfo}
 
           <Label>Amount: </Label>
           <InputText
@@ -93,6 +97,8 @@ class Pay extends React.Component {
             value={amount}
             onChange={this.handleChangeAmount}
           /> 
+
+          {this.state.amountInfo}
 
           <Button onClick={this.sendTransaction}>Send</Button>
         </center>
