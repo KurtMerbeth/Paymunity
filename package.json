@@ -1,0 +1,26 @@
+{
+  "name": "paymunity",
+  "version": "1.0.0",
+  "description": "paymunity - community payment",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KurtMerbeth/Paymunity.git"
+  },
+  "keywords": [
+    "paymunity",
+    "biconomy",
+    "walletconnect",
+    "react",
+    "web3js"
+  ],
+  "author": "Kurt Merbeth, Valerie Vaske",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KurtMerbeth/Paymunity/issues"
+  },
+  "homepage": "https://github.com/KurtMerbeth/Paymunity#readme"
+}
