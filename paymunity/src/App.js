@@ -78,6 +78,11 @@ class App extends Component {
     this.setState({showLogin: false, showPay: true, showCurrentBalance: true});
   }
 
+  afterTransfer = () => {
+    this.setState({showLogin: false, showPay: false, showCurrentBalance: false});
+    this.afterLogin();
+  }
+
   loadCurrentBalance = async () => {
     let balance = '0.00';
     console.log("loadBalance();")
@@ -99,6 +104,8 @@ class App extends Component {
     console.log("transferDai()");
     console.log("to: "+recipient);
     console.log("amount: "+amount);
+    console.log("network:");
+    this.state.web3.eth.net.getId().then(console.log);
     const wei = Web3.utils.toWei(amount);
     console.log("in Wei: "+wei )
     this.state.daiToken.methods.transfer(recipient, wei).send({from: this.state.account}, function(err, res) {
