@@ -51,7 +51,7 @@ class App extends Component {
         // after login, setState account, isLoggedIn and load actual balance
         console.log("account found");
         this.setState({account: accounts[0], isLoggedIn: true});
-        console.log("account: "+this.props.account);
+        console.log("account: "+this.state.account);
       }
     });
   }
