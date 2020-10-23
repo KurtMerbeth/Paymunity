@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './App.css';
 
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -10,11 +9,7 @@ class App extends Component {
   constructor() {
     super();
       this.state = {
-        showHeader: true,
-        showUserMain: false,
-        showUserMenu: false,
         isLoggedIn: false,
-        test: true,
         web3: 'undefined',
         account: 'undefined',
         balance: 'undefined'
@@ -28,7 +23,7 @@ class App extends Component {
 
   walletConnect = async () => {
     console.log("walletConnect();")
-    const provider = new WalletConnectProvider({
+    const provider = await new WalletConnectProvider({
       infuraId: "15119f0f05bd45cd859eb838c7041e43", // Required
       rpc: {
         3: "https://ropsten-rpc.linkpool.io/"
@@ -46,7 +41,7 @@ class App extends Component {
     });
 
     await provider.enable();
-    await this.setState({web3: new Web3(provider)});
+    await this.setState({web3: await new Web3(provider)});
 
     await this.state.web3.eth.getAccounts((error, accounts) => {
       if (accounts.length === 0) {
@@ -68,7 +63,7 @@ class App extends Component {
         </div>
         <div class="body">
           <br /> 
-          {!this.state.isLoggedIn && <Welcome walletConnect={this.walletConnect} />}
+          {<Welcome walletConnect={this.walletConnect} />}
         </div>
       </div>
     );
