@@ -9,6 +9,8 @@ import Welcome from "./components/Welcome"
 import Pay from "./components/Pay"
 import CurrentBalance from './components/CurrentBalance'
 
+import Biconomy from '@biconomy/mexa'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
@@ -52,21 +54,35 @@ class App extends Component {
       }
     });
 
-    await provider.enable();
-    await this.setState({web3: await new Web3(provider)});
+    await provider.enable()
+    const biconomy = new Biconomy(provider, {apiKey: 'W7sBykeYY.01629976-02e3-467a-aae8-343dcd1df9a4'})
+    await this.setState({web3: await new Web3(biconomy)})
 
-    await this.state.web3.eth.getAccounts((error, accounts) => {
-      if (accounts.length === 0) {
-        console.log("no active accounts");
-        // there is no active accounts
-      } else {
-        // after login, setState account, isLoggedIn and load actual balance
-        console.log("account found");
-        this.setState({account: accounts[0], isLoggedIn: true});
-        console.log("account: "+this.state.account);
-        this.afterLogin();
-      }
+    console.log("SetState();")
+
+    biconomy.onEvent(biconomy.READY, async () => {
+      // Initialize your dapp here like getting user accounts etc
+      console.log(this.state.web3.eth.getAccounts)
+      await this.state.web3.eth.getAccounts((error, accounts) => {
+        if (accounts.length === 0) {
+          console.log("no active accounts");
+          // there is no active accounts
+        } else {
+          // after login, setState account, isLoggedIn and load actual balance
+          console.log("account found");
+          this.setState({account: accounts[0], isLoggedIn: true});
+          console.log("account: "+this.state.account);
+          this.afterLogin();
+        }
+      });
+
+    }).onEvent(biconomy.ERROR, (error, message) => {
+      console.log("Konsolenerror")
+      console.log(message)
     });
+
+    console.log("KonsolenerrorError")
+    
   }
 
   initDai = async () => {
@@ -121,10 +137,10 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <div class="header">
+        <div className="header">
           <Header />
         </div>
-        <div class="body">
+        <div className="body">
           <br /> 
           {(!this.state.isLoggedIn && this.state.showLogin) && <Welcome walletConnect={this.walletConnect} />}
           {(this.state.isLoggedIn && this.state.showPay) && <Pay transferDai={this.transferDai} balance={this.state.balance}/>}
