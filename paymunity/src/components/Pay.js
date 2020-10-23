@@ -59,9 +59,11 @@ class Pay extends React.Component {
   sendTransaction = async (event) => {
 
     event.preventDefault()
+    
     if(Web3.utils.isAddress(this.state.recipient) && (this.state.amount > 0 && this.state.amount < this.props.balance)) {
       this.setState({addressInfo: '', amountInfo: ''})
-      this.props.sendButton(this.state);
+      console.log("transfer dai!")
+      this.props.transferDai(this.state.recipient, this.state.amount);
     } else {
       if(!Web3.utils.isAddress(this.state.recipient)) this.setState({addressInfo: 'address invalid'});
       if(this.state.amount <= 0) this.setState({amountInfo: 'amount too low'});

@@ -95,6 +95,22 @@ class App extends Component {
   console.log(this.state.balance)
   }
 
+  transferDai = async (recipient, amount) => {
+    console.log("transferDai()");
+    console.log("to: "+recipient);
+    console.log("amount: "+amount);
+    const wei = Web3.utils.toWei(amount);
+    console.log("in Wei: "+wei )
+    this.state.daiToken.methods.transfer(recipient, wei).send({from: this.state.account}, function(err, res) {
+      if (err) {
+          console.log("An error occured", err);
+          return
+      }
+      console.log("Hash of the transaction: " + res)
+  })
+   }
+
+
   render() {
     return (
       <div className="App">
@@ -104,7 +120,7 @@ class App extends Component {
         <div class="body">
           <br /> 
           {(!this.state.isLoggedIn && this.state.showLogin) && <Welcome walletConnect={this.walletConnect} />}
-          {(this.state.isLoggedIn && this.state.showPay) && <Pay />}
+          {(this.state.isLoggedIn && this.state.showPay) && <Pay transferDai={this.transferDai} balance={this.state.balance}/>}
           {(this.state.isLoggedIn && this.state.showCurrentBalance) && <CurrentBalance loadCurrentBalance={this.loadCurrentBalance} balance={this.state.balance} />}
         </div>
       </div>
