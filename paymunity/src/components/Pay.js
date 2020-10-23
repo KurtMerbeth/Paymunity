@@ -70,7 +70,7 @@ class Pay extends React.Component {
 
 
   render() {
-    
+
     const { recipient, amount } = this.state
 
     return (
