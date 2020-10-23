@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Web3 from "web3";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Welcome from "./components/Welcome"
+import Pay from "./components/Pay"
+
 
 class App extends Component {
 
@@ -10,6 +12,8 @@ class App extends Component {
     super();
       this.state = {
         isLoggedIn: false,
+        showLogin: true,
+        showPay: false,
         web3: 'undefined',
         account: 'undefined',
         balance: 'undefined'
@@ -52,8 +56,13 @@ class App extends Component {
         console.log("account found");
         this.setState({account: accounts[0], isLoggedIn: true});
         console.log("account: "+this.state.account);
+        this.afterLogin();
       }
     });
+  }
+
+  afterLogin = () => {
+    this.setState({showLogin: false, showPay: true});
   }
 
   render() {
@@ -63,7 +72,9 @@ class App extends Component {
         </div>
         <div class="body">
           <br /> 
-          {<Welcome walletConnect={this.walletConnect} />}
+          {(!this.state.isLoggedIn && this.state.showLogin) && <Welcome walletConnect={this.walletConnect} />}
+          {(this.state.isLoggedIn && this.state.showPay) && <Pay />}
+
         </div>
       </div>
     );
