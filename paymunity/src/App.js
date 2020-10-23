@@ -9,6 +9,8 @@ import Welcome from "./components/Welcome"
 import Pay from "./components/Pay"
 import CurrentBalance from './components/CurrentBalance'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 
 class App extends Component {
 
