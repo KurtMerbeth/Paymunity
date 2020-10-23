@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
 
 import Web3 from "web3";
+import { DAI_ADDRESS, ERC20ABI } from "./utils/const";
 import WalletConnectProvider from "@walletconnect/web3-provider";
 import Welcome from "./components/Welcome"
 import Pay from "./components/Pay"
+import CurrentBalance from './components/CurrentBalance'
 
 
 class App extends Component {
@@ -14,6 +16,8 @@ class App extends Component {
         isLoggedIn: false,
         showLogin: true,
         showPay: false,
+        showCurrentBalance: false,
+        daiToken: 'undefined',
         web3: 'undefined',
         account: 'undefined',
         balance: 'undefined'
@@ -61,8 +65,30 @@ class App extends Component {
     });
   }
 
+  initDai = async () => {
+    this.setState({daiToken: new this.state.web3.eth.Contract(ERC20ABI, DAI_ADDRESS)});
+  }
+
   afterLogin = () => {
-    this.setState({showLogin: false, showPay: true});
+    this.initDai();
+    this.setState({showLogin: false, showPay: true, showCurrentBalance: true});
+  }
+
+  loadCurrentBalance = async () => {
+    let balance = '0.00';
+    console.log("loadBalance();")
+    await this.state.daiToken.methods.balanceOf(this.state.account).call(function(err, res) {
+      if (err) {
+          console.log("An error occured", err);
+          balance = 'error';
+          return
+      }
+      balance = res;
+      console.log("The balance is: ",balance)
+      
+  })
+  this.setState({balance: Math.floor(Web3.utils.fromWei(balance, 'ether')*10000)/10000})
+  console.log(this.state.balance)
   }
 
   render() {
@@ -74,7 +100,7 @@ class App extends Component {
           <br /> 
           {(!this.state.isLoggedIn && this.state.showLogin) && <Welcome walletConnect={this.walletConnect} />}
           {(this.state.isLoggedIn && this.state.showPay) && <Pay />}
-
+          {(this.state.isLoggedIn && this.state.showCurrentBalance) && <CurrentBalance loadCurrentBalance={this.loadCurrentBalance} balance={this.state.balance} />}
         </div>
       </div>
     );

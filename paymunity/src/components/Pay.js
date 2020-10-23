@@ -1,7 +1,7 @@
  
 import React from 'react';
 
-class Welcome extends React.Component {
+class Pay extends React.Component {
 
   constructor(props) {
       super(props);
@@ -16,4 +16,4 @@ class Welcome extends React.Component {
     );
   }
 }
-export default Welcome;
+export default Pay;
