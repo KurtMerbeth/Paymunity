@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import logo from '../media/logo.png'
 import styled from 'styled-components'
 
 const Wrapper = styled.div`
@@ -10,7 +10,9 @@ class Header extends Component {
     render() {
         return (
             <Wrapper>
-                <p>This is the Header. Do we even need this? </p>
+                <center>
+                    <img src={logo} width="261" height="84" alt="logo :)" />
+                </center>
             </Wrapper>
         )
     }

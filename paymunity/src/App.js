@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import Web3 from "web3";
 import { DAI_ADDRESS, ERC20ABI } from "./utils/const";
 import WalletConnectProvider from "@walletconnect/web3-provider";
+
+import Header from "./components/Header"
 import Welcome from "./components/Welcome"
 import Pay from "./components/Pay"
 import CurrentBalance from './components/CurrentBalance'
@@ -95,6 +97,7 @@ class App extends Component {
     return (
       <div className="App">
         <div class="header">
+          <Header />
         </div>
         <div class="body">
           <br /> 
